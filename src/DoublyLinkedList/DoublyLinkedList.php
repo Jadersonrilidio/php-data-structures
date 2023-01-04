@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Utils;
+namespace Src\DoublyLinkedList;
 
-use \App\Utils\Cell;
+use \Src\DoublyLinkedList\Cell;
 // use \ArrayAccess;
 use \Countable;
 // use \Iterator;
 // use \Serializable;
 
 /**
- *   //todo list
+ *   //todo
  * - Need to implement method unserialize($data) properly in order to use the Serializable interface;
  * - Need to implement next() properly in order to use the Iterator interface (amongst other methods);
  * - Find out how to use the inferface ArrayAccess methods properly, and advantages;
@@ -517,8 +517,12 @@ class DoublyLinkedList implements Countable //,Serializable //,Iterator
 
         for ($this->pointer = 0; $this->pointer < $this->length; $this->pointer++) {
             $array[(string) $this->pointer] = $this->current->getContent();
-            $this->current = $this->current->getNext();
+            if ($this->current->getNext() !== null) {
+                $this->current = $this->current->getNext();
+            }
         }
+
+        $this->rewind();
 
         return $array;
     }
